@@ -37,7 +37,8 @@ public class MusicTrack {
             this.style = style;
             this.length = length;
         } else {
-            throw new IllegalArgumentException("Invalid parameters for the music track.");
+            throw new IllegalArgumentException(
+                    "Invalid parameters for the music track.");
         }
     }
 
@@ -46,6 +47,7 @@ public class MusicTrack {
      *
      * @param title  string
      * @param length int
+     * @throws IllegalArgumentException when the parameters are not valid
      */
     public MusicTrack(final String title, final int length) {
         if (isValid(title, length, "unknown")) {
@@ -53,7 +55,8 @@ public class MusicTrack {
             this.style = "unknown";
             this.length = length;
         } else {
-            throw new IllegalArgumentException("Invalid parameters for the music track.");
+            throw new IllegalArgumentException(
+                    "Invalid parameters for the music track.");
         }
     }
 
@@ -105,14 +108,16 @@ public class MusicTrack {
      */
     @Override
     public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
         if (obj instanceof MusicTrack) {
             MusicTrack m = (MusicTrack) obj;
             return m.getTitle().equals(this.getTitle())
-                    && (m.getLength() == this.getLength()
-                    && m.getStyle().equals(this.getStyle()));
+                    && m.getLength() == this.getLength()
+                    && m.getStyle().equals(this.getStyle());
 
         }
-
         return false;
     }
 
@@ -132,6 +137,6 @@ public class MusicTrack {
      */
     @Override
     public String toString() {
-        return title + " "  + length + " " + style;
+        return title + " " + length + " " + style;
     }
 }

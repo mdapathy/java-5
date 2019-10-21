@@ -17,15 +17,15 @@ public class DoublyLinkedList<E> implements Iterable<E> {
         /**
          * the list element.
          */
-        protected E element;
+        private E element;
         /**
          * the previous element.
          */
-        protected Node prev;
+        private Node prev;
         /**
          * the next element.
          */
-        protected Node next;
+        private Node next;
 
         /**
          * @param node element
@@ -219,11 +219,12 @@ public class DoublyLinkedList<E> implements Iterable<E> {
      * @throws IllegalArgumentException if the position is out of range
      */
     public E get(final int position) throws IllegalArgumentException {
-        return (E) getNodeAtPosition(position).element;
+        return getNodeAtPosition(position).element;
     }
 
     /**
      * @param position of the element to remove
+     * @return E element that was removed
      * @throws IllegalArgumentException if the position exceeds the range
      */
     public E remove(final int position) throws IllegalArgumentException {
@@ -255,40 +256,13 @@ public class DoublyLinkedList<E> implements Iterable<E> {
 
     }
 
+    /**
+     * @return iterator for the list
+     */
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
             private Node tmp = new Node(null, null, head);
-
-            @Override
-            public boolean hasNext() {
-                return tmp.next != null;
-            }
-
-            @Override
-            public E next() {
-                tmp = tmp.next;
-                return tmp.element;
-            }
-
-            public boolean hasPrevious() {
-                return tmp.prev != null;
-            }
-
-            public E previous() {
-                tmp = tmp.prev;
-                return tmp.element;
-            }
-
-
-        };
-
-    }
-
-    public Iterator<E> iterator(int position) {
-        return new Iterator<E>() {
-
-            private Node tmp = getNodeAtPosition(position);
 
             @Override
             public boolean hasNext() {

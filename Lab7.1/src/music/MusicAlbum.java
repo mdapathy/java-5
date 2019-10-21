@@ -23,7 +23,7 @@ public class MusicAlbum {
     /**
      * Maximum amount of objects in array.
      */
-    private int maxAmountOfRecords = 14;
+    private final int maxAmountOfRecords = 14;
 
     /**
      * An array of music tracks.
@@ -38,6 +38,7 @@ public class MusicAlbum {
      * Constructor.
      *
      * @param title string
+     * @throws IllegalArgumentException when the string is empty
      */
     public MusicAlbum(final String title) throws IllegalArgumentException {
         if (title.length() > 1) {
@@ -45,7 +46,8 @@ public class MusicAlbum {
             this.musicTracks = new MusicTrack[maxAmountOfRecords];
             this.counter = 0;
         } else {
-            throw new IllegalArgumentException("Invalid parameters for the music album.");
+            throw new IllegalArgumentException(
+                    "Invalid parameters for the music album.");
         }
 
     }
@@ -63,7 +65,7 @@ public class MusicAlbum {
     /**
      * Add a record or multiple records to an album.
      *
-     * @param musicTrack musictracks
+     * @param musicTrack music tracks
      */
     public void add(final MusicTrack... musicTrack) {
         for (MusicTrack arg : musicTrack) {
@@ -168,10 +170,16 @@ public class MusicAlbum {
 
     }
 
-
+    /**
+     *
+     * @param position position of the element to get
+     * @return element
+     * @throws IllegalArgumentException when the position is out of range
+     */
     public MusicTrack get(final int position) {
         if (position < 0 || position > maxAmountOfRecords) {
-            throw new IllegalArgumentException("Position in the album out of range");
+            throw new IllegalArgumentException(
+                    "Position in the album out of range");
         }
 
         return musicTracks[position];

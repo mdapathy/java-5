@@ -1,12 +1,21 @@
 package lists;
-import java.util.*;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.Iterator;
 
 
 /**
  * Class represents an array of Objects.
+ *
+ * @param <E> class to put into the list
  */
 public class List<E> implements Iterable<E> {
 
+    /**
+     * Inner structure of a list.
+     */
     private DoublyLinkedList list;
 
     /**
@@ -21,7 +30,7 @@ public class List<E> implements Iterable<E> {
      * @param elements collection
      */
     public List(final Collection<E> elements) {
-        this.list = new DoublyLinkedList<E>(elements);
+        this.list = new DoublyLinkedList<>(elements);
     }
 
 
@@ -32,7 +41,6 @@ public class List<E> implements Iterable<E> {
      */
     public List(final Object element) {
         this.list = new DoublyLinkedList(element);
-        //TODO
 
     }
 
@@ -41,7 +49,7 @@ public class List<E> implements Iterable<E> {
      * @return size of the list
      */
     public int size() {
-        return this.list.size;
+        return this.list.size();
     }
 
 
@@ -61,7 +69,7 @@ public class List<E> implements Iterable<E> {
 
     public void add(final Object element) {
 
-        list.add(element);
+        list.add((E) element);
     }
 
 
@@ -73,7 +81,7 @@ public class List<E> implements Iterable<E> {
             return null;
         }
 
-        E[] arr = (E[])new Object[list.size];
+        E[] arr = (E[]) new Object[list.size];
         Iterator<E> iterator = list.iterator();
         int counter = 0;
 
@@ -160,7 +168,7 @@ public class List<E> implements Iterable<E> {
         }
 
         for (Object e : c) {
-            this.list.add(e);
+            this.list.add((E )e);
         }
 
         return true;
@@ -176,7 +184,7 @@ public class List<E> implements Iterable<E> {
             return -1;
         }
 
-        Iterator<Object> iterator = list.iterator();
+        Iterator<Object> iterator = (Iterator<Object>) list.iterator();
         int counter = 0;
         while (iterator.hasNext()) {
             if (iterator.next() == element) {
@@ -189,29 +197,6 @@ public class List<E> implements Iterable<E> {
 
     }
 
-    /**
-     * Looks for the element beginning from the tail.
-     *
-     * @param element to look for
-     * @return index of element or -1 if there is none
-     */
-    public int lastIndexOf(final Object element) {
-        if (list.head == null) {
-            return -1;
-        }
-
-        Iterator<Object> iterator = list.iterator(list.size - 1);
-        int counter = list.size - 1;
-
-        while (counter >= 0) {
-            if (iterator.next() == element) {
-                return counter;
-            }
-            counter--;
-        }
-
-        return -1;
-    }
 
     /**
      * @param index   to modify the element
@@ -222,7 +207,7 @@ public class List<E> implements Iterable<E> {
     public Object set(final int index, final Object element)
             throws IllegalArgumentException {
 
-        return list.set(index, element);
+        return list.set(index, (E) element);
     }
 
 
@@ -233,7 +218,7 @@ public class List<E> implements Iterable<E> {
      */
     public void add(final int index,
                     final Object element) throws IllegalArgumentException {
-        list.add(index, element);
+        list.add(index, (E) element);
 
     }
 
@@ -252,7 +237,7 @@ public class List<E> implements Iterable<E> {
         int counter = index;
 
         for (Object element : c) {
-            list.add(counter, element);
+            list.add(counter,(E) element);
             counter += 1;
         }
 
@@ -312,7 +297,7 @@ public class List<E> implements Iterable<E> {
      * @return iterator over the elements of the list
      */
     public Iterator<E> iterator() {
-        return (Iterator<E>) list.iterator();
+        return list.iterator();
 
     }
 
@@ -341,7 +326,7 @@ public class List<E> implements Iterable<E> {
      */
     @Override
     public boolean equals(final Object o) {
-        return list.equals(o);
+        return (this == o) || ((o instanceof List) && list.equals(o));
     }
 
 
@@ -355,7 +340,7 @@ public class List<E> implements Iterable<E> {
         }
 
         if (a.length < size()) {
-            a = (E[])new Object[size()];
+            a = (E[]) new Object[size()];
         }
 
         Iterator<E> iterator = list.iterator();
