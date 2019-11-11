@@ -6,7 +6,13 @@ import java.util.Arrays;
 
 public class Main {
 
-    public static void main(String[] args) {
+    /**
+     * Main method to work with lists.List.
+     *
+     * @param args command line arguments
+     */
+    public static void main(final String[] args) {
+
         final int len1 = 111;
         final int len2 = 222;
         final int len3 = 333;
@@ -17,12 +23,13 @@ public class Main {
         MusicTrack third = new MusicTrack("Track3", len3);
         MusicTrack fourth = new RockMusicTrack("Track4", len4);
 
-        MyList<MusicTrack> list = new MyList<MusicTrack>(Arrays.asList(fourth, first, second,
-                third, fourth, first));
+        MyList<MusicTrack> list = new MyList<>(Arrays.asList(fourth, first,
+                third, fourth, first, second));
 
-        list.sort((o, t1) -> Integer.compare(t1.getLength(),
-                o.getLength()));
+        System.out.println(list.toString());
 
+        list.sort((o, t1) -> Integer.compare(((MusicTrack )t1).getLength(),
+                ((MusicTrack)o).getLength()));
         System.out.println(list.toString());
 
 

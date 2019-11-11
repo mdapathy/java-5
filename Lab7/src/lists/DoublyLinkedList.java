@@ -18,15 +18,15 @@ public class DoublyLinkedList<E> implements Iterable<E> {
         /**
          * the list element.
          */
-        protected E element;
+        private E element;
         /**
          * the previous element.
          */
-        protected Node prev;
+        private Node prev;
         /**
          * the next element.
          */
-        protected Node next;
+        private Node next;
 
         /**
          * @param node element
@@ -114,7 +114,6 @@ public class DoublyLinkedList<E> implements Iterable<E> {
         }
 
         size++;
-
         return true;
     }
 
@@ -122,14 +121,10 @@ public class DoublyLinkedList<E> implements Iterable<E> {
     /**
      * @param index   position to put an element to.
      * @param element to put.
-     * @throws ListException if index is out of range
+     * @throws IllegalArgumentException if index is out of range
      */
     public void add(final int index,
-                    final E element) throws ListException {
-
-        if (index > size || index < 0) {
-            throw new ListException("Position out of range");
-        }
+                    final E element) throws IllegalArgumentException {
 
         if (index == size) {
             add(element);
@@ -143,7 +138,6 @@ public class DoublyLinkedList<E> implements Iterable<E> {
             toPlace.next = head;
             head = toPlace;
             size++;
-
         } else {
 
             Node prev = getNodeAtPosition(index - 1);
@@ -187,7 +181,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
      */
     private Node getNodeAtPosition(final int position) {
         if (position >= size || size == 0 || position < 0) {
-            throw new ListException(
+            throw new IllegalArgumentException(
                     "Position in the list out of range");
         }
 
@@ -224,17 +218,19 @@ public class DoublyLinkedList<E> implements Iterable<E> {
     /**
      * @param position to look into
      * @return element
-     * @throws ListException if the position is out of range
+     * @throws IllegalArgumentException if the position is out of range
      */
-    public E get(final int position) throws ListException {
+    public E get(final int position) throws IllegalArgumentException {
         return getNodeAtPosition(position).element;
     }
 
     /**
      * @param position of the element to remove
-     * @throws ListException if the position exceeds the range
+     * @return E element that was removed
+     * @throws IllegalArgumentException if the position exceeds the range
      */
-    public E remove(final int position) throws ListException {
+    public E remove(final int position) throws IllegalArgumentException {
+
 
         if (size == 1) {
             E tmp = head.element;
@@ -262,19 +258,9 @@ public class DoublyLinkedList<E> implements Iterable<E> {
 
     }
 
-    public boolean remove(Object o) {
-
-        int tmp = findPosition(o);
-
-        if (tmp != -1) {
-            remove(tmp);
-            return true;
-        }
-
-        return false;
-
-    }
-
+    /**
+     * @return iterator for the list
+     */
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
@@ -291,20 +277,28 @@ public class DoublyLinkedList<E> implements Iterable<E> {
                 return tmp.element;
             }
 
+            public boolean hasPrevious() {
+                return tmp.prev != null;
+            }
+
+            public E previous() {
+                tmp = tmp.prev;
+                return tmp.element;
+            }
+
 
         };
 
     }
 
-
     /**
      * @param index   to modify the element
      * @param element value to put at index's position.
      * @return the value that was modified
-     * @throws ListException if index is out of range.
+     * @throws IllegalArgumentException if index is out of range.
      */
     public E set(final int index, final E element)
-            throws ListException {
+            throws IllegalArgumentException {
 
         Node tmp = getNodeAtPosition(index);
         E toReturn = tmp.element;
@@ -356,7 +350,6 @@ public class DoublyLinkedList<E> implements Iterable<E> {
             }
             return true;
         }
-        System.out.println(this.toString() + "\n" + o.toString());
         return false;
     }
 
@@ -367,21 +360,6 @@ public class DoublyLinkedList<E> implements Iterable<E> {
         head = null;
         tail = null;
         size = 0;
-    }
-
-
-    private int findPosition(Object o) {
-        Node tmp = head;
-
-        for (int i = 0; tmp!= null; i++) {
-            if (tmp.element.equals(o)) {
-                return i;
-            }
-            tmp = tmp.next;
-        }
-
-        return -1;
-
     }
 
 
@@ -506,6 +484,36 @@ public class DoublyLinkedList<E> implements Iterable<E> {
 
             }
         };
+
+    }
+
+    public boolean remove(Object o) {
+
+        int tmp = findPosition(o);
+
+        if (tmp != -1) {
+            remove(tmp);
+            return true;
+        }
+
+        return false;
+
+    }
+
+
+
+    private int findPosition(Object o) {
+        Node tmp = head;
+
+        for (int i = 0; tmp!= null; i++) {
+            if (tmp.element.equals(o)) {
+                return i;
+            }
+            tmp = tmp.next;
+        }
+
+        return -1;
+
     }
 
 }

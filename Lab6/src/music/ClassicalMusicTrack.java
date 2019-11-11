@@ -4,15 +4,14 @@
  *
  */
 package music;
-
 /**
  * Class ClassicalMusicTrack represents MusicTracks
  * with classical defined as style.
  */
 
-public class ClassicalMusicTrack extends MusicTrack {
+public class ClassicalMusicTrack extends  MusicTrack {
 
-    public ClassicalMusicTrack(final String title, final int length) {
+    ClassicalMusicTrack(final String title, final int length) {
         super(title, length, "Classical");
     }
 }

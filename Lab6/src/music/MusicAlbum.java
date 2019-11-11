@@ -38,13 +38,13 @@ public class MusicAlbum {
      * Constructor.
      * @param title string
      */
-    public MusicAlbum(final String title) throws IllegalArgumentException {
+    public MusicAlbum(final String title) {
         if (title.length() > 1) {
             this.title = title;
             this.musicTracks = new MusicTrack[maxAmountOfRecords];
             this.counter = 0;
         } else {
-            throw new IllegalArgumentException("Invalid parameters for the music album.");
+            throw new Error("Invalid parameters for the music album.");
         }
 
     }
@@ -136,9 +136,20 @@ public class MusicAlbum {
                         + "\t Style - " + musicTrack.getStyle());
             }
         }
-        System.out.println("------------------------");
+        System.out.println("----------------------");
     }
 
+
+    /**
+     * Fill the album with various predefined tracks.
+     */
+    public void createAlbum() {
+        add(new RockMusicTrack("Yesterday", 126),
+                new BluesMusicTrack("Jane Done", 215),
+                new MusicTrack("Undefined", 103),
+                new ClassicalMusicTrack("Beethoven's", 303),
+                new RockMusicTrack("Rock Record ", 243));
+    }
 
     /**
      * Find track(s) with length in between bounds.

@@ -12,7 +12,7 @@ package music;
 
 public class BluesMusicTrack extends MusicTrack {
 
-    public BluesMusicTrack(final String title, final int length) {
+    BluesMusicTrack(final String title, final int length) {
         super(title, length, "Blues");
     }
 }

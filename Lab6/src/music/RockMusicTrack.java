@@ -12,8 +12,7 @@ package music;
 
 public class RockMusicTrack extends MusicTrack {
 
-    public RockMusicTrack(final String title, final int length) {
+    RockMusicTrack(final String title, final int length) {
         super(title, length, "Rock");
     }
-
 }

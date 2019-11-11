@@ -12,20 +12,20 @@ class ListTest {
 
     @Test
     void initializeEmptyList() {
-        List<Object> list = new List<Object>();
+        MyList<Object> list = new MyList<Object>();
         assertEquals(list.size(), 0);
     }
 
     @Test
     void initializeListWithASingleElement() {
-        List<Object> list = new List<>(1);
+        MyList<Object> list = new MyList<>(1);
         assertEquals(list.size(), 1);
 
     }
 
     @Test
     void initializeListWithACollectionOfElement() {
-        List<Object> list = new List<>(Arrays.asList(1, 2, 3));
+        MyList<Object> list = new MyList<>(Arrays.asList(1, 2, 3));
         assertEquals(list.size(), 3);
         assertEquals(1, list.get(0));
         assertEquals(2, list.get(1));
@@ -35,20 +35,20 @@ class ListTest {
 
     @Test
     void givenEmptyListSizeShouldReturnZero() {
-        List<Object> list = new List<>();
+        MyList<Object> list = new MyList<>();
         assertEquals(list.size(), 0);
     }
 
     @Test
     void givenListWithElementSizeShouldReturnOne() {
-        List<Object> list = new List<>(25);
+        MyList<Object> list = new MyList<>(25);
         assertEquals(list.size(), 1);
     }
 
 
     @Test
     void givenListWithNullElementIsEmptyShouldReturnFalse() {
-        List<Object> list = new List<Object>();
+        MyList<Object> list = new MyList<Object>();
         list.add(null);
         assertFalse(list.isEmpty());
     }
@@ -56,14 +56,14 @@ class ListTest {
 
     @Test
     void givenListWithAnElementSizeShouldReturnOne() {
-        List<Object> list = new List<Object>(25);
+        MyList<Object> list = new MyList<Object>(25);
         assertFalse(list.isEmpty());
     }
 
 
     @Test
     void addShouldAppendTheElement() {
-        List<Object> list = new List<Object>(25);
+        MyList<Object> list = new MyList<Object>(25);
         list.add(4);
 
         assertEquals(list.get(0), 25);
@@ -73,7 +73,7 @@ class ListTest {
 
     @Test
     void toArrayOfEmptyListShouldReturnNull() {
-        List<Object> list = new List<Object>();
+        MyList<Object> list = new MyList<Object>();
         Object[] arr = list.toArray();
         assertNull(arr);
 
@@ -81,7 +81,7 @@ class ListTest {
 
     @Test
     void toArrayOfAListShouldReturnAnArrayOfElementsInTheSameOrder() {
-        List<Object> list = new List<Object>(Arrays.asList(0, 1, 2, 3, 4));
+        MyList<Object> list = new MyList<Object>(Arrays.asList(0, 1, 2, 3, 4));
         Object[] arr = list.toArray();
         assertEquals(5, arr.length);
 
@@ -95,7 +95,7 @@ class ListTest {
 
     @Test
     void containsShouldReturnTrueIfAnObjectIsInTheList() {
-        List<Object> list = new List<Object>(Arrays.asList(0, 5));
+        MyList<Object> list = new MyList<Object>(Arrays.asList(0, 5));
         assertTrue(list.contains(0));
         assertTrue(list.contains(5));
 
@@ -106,7 +106,7 @@ class ListTest {
 
     @Test
     void containsShouldReturnFalseIfAnObjectIsNotInTheList() {
-        List<Object> list = new List<Object>(Arrays.asList(0, 5));
+        MyList<Object> list = new MyList<Object>(Arrays.asList(0, 5));
         assertFalse(list.contains(null));
         assertFalse(list.contains("5"));
 
@@ -114,7 +114,7 @@ class ListTest {
 
     @Test
     void toStringShouldReturnAProperString() {
-        List<Object> list = new List<Object>(Arrays.asList(0, 15, 5, 1));
+        MyList<Object> list = new MyList<Object>(Arrays.asList(0, 15, 5, 1));
         String toString = list.toString();
         assertEquals(toString, "0 -> 15 -> 5 -> 1");
 
@@ -123,7 +123,7 @@ class ListTest {
 
     @Test
     void toStringOfAnEmptyListShouldReturnAnEmptyString() {
-        List<Object> list = new List<Object>();
+        MyList<Object> list = new MyList<Object>();
         String toString = list.toString();
         assertEquals(toString.length(), 0);
 
@@ -132,7 +132,7 @@ class ListTest {
 
     @Test
     void clearShouldReduceTheSizeOfListToZero() {
-        List<Object> list = new List<Object>(Arrays.asList(5, 6, 7, 8, 9));
+        MyList<Object> list = new MyList<Object>(Arrays.asList(5, 6, 7, 8, 9));
         assertDoesNotThrow(list::clear);
         assertEquals(0, list.size());
 
@@ -141,7 +141,7 @@ class ListTest {
 
     @Test
     void getPositionOutOfRangeShouldThrowError() {
-        List<Object> list = new List<Object>(Arrays.asList(5, 6, 7, 8, 9));
+        MyList<Object> list = new MyList<Object>(Arrays.asList(5, 6, 7, 8, 9));
 
         ListException thrown1 =
                 assertThrows(ListException.class,
@@ -160,7 +160,7 @@ class ListTest {
     @Test
     void removeOutOfRangeShouldThrowError() {
 
-        List<Object> list = new List<Object>(Arrays.asList(5, 6, 7, 8, 9));
+        MyList<Object> list = new MyList<Object>(Arrays.asList(5, 6, 7, 8, 9));
 
         ListException thrown1 =
                 assertThrows(ListException.class,
@@ -177,7 +177,7 @@ class ListTest {
 
     @Test
     void testRemove() {
-        List<Object> list = new List<Object>(Arrays.asList(5, 6, 7, 8, 9));
+        MyList<Object> list = new MyList<Object>(Arrays.asList(5, 6, 7, 8, 9));
         Object obj = list.remove(2);
         assertEquals(7, obj);
         assertEquals(8, list.get(2));
@@ -186,26 +186,26 @@ class ListTest {
 
     @Test
     void containsAllShouldReturnFalse() {
-        List<Object> list = new List<Object>(Arrays.asList(5, 6, 7, 8, 9));
+        MyList<Object> list = new MyList<Object>(Arrays.asList(5, 6, 7, 8, 9));
         assertFalse(list.containsAll(Arrays.asList(1, 1, 11, 0)));
     }
 
     @Test
     void addAllOfNullShouldReturnFalse() {
-        List<Object> list = new List<Object>(Arrays.asList(5, 6, 7, 8, 9));
+        MyList<Object> list = new MyList<Object>(Arrays.asList(5, 6, 7, 8, 9));
         assertFalse(list.addAll(null));
     }
 
     @Test
     void testContainsAll() {
-        List<Object> list = new List<Object>(Arrays.asList(5, 6, 7, 8, 9));
+        MyList<Object> list = new MyList<Object>(Arrays.asList(5, 6, 7, 8, 9));
         assertTrue(list.containsAll(Arrays.asList(6, 6, 9, 7, 8)));
 
     }
 
     @Test
     void testAddAll() {
-        List<Object> list = new List<Object>(Arrays.asList(5, 6, 7, 8, 9));
+        MyList<Object> list = new MyList<Object>(Arrays.asList(5, 6, 7, 8, 9));
         assertTrue(list.addAll(Arrays.asList(6, 1, 5, 7, 8)));
 
         assertEquals(10, list.size());
@@ -219,7 +219,7 @@ class ListTest {
 
     @Test
     void indexOfShouldReturnFirstIndex() {
-        List<Object> list = new List<Object>(Arrays.asList(5, 6, 5, 8, 6));
+        MyList<Object> list = new MyList<Object>(Arrays.asList(5, 6, 5, 8, 6));
         assertEquals(0, list.indexOf(5));
         assertEquals(1, list.indexOf(6));
 
@@ -227,7 +227,7 @@ class ListTest {
 
     @Test
     void indexOfShouldReturnNegativeValueIfNotFound() {
-        List<Object> list = new List<Object>(Arrays.asList(5, 6, 5, 8, 6));
+        MyList<Object> list = new MyList<Object>(Arrays.asList(5, 6, 5, 8, 6));
         assertEquals(-1, list.indexOf(10));
         assertEquals(-1, list.indexOf(null));
 
@@ -237,7 +237,7 @@ class ListTest {
     @Test
     void setPositionOutOfRangeShouldThrowError() {
 
-        List<Object> list = new List<Object>(Arrays.asList(5, 6, 7, 8, 9));
+        MyList<Object> list = new MyList<Object>(Arrays.asList(5, 6, 7, 8, 9));
 
         ListException thrown1 =
                 assertThrows(ListException.class,
@@ -256,7 +256,7 @@ class ListTest {
 
     @Test
     void setShouldChangeTheElement() {
-        List<Object> list = new List<Object>(Arrays.asList(5, 6, 7, 8, 9));
+        MyList<Object> list = new MyList<Object>(Arrays.asList(5, 6, 7, 8, 9));
         Object obj = list.set(0, 1);
 
         assertEquals(5, obj);
@@ -267,7 +267,7 @@ class ListTest {
     @Test
     void addPositionOutOfRangeShouldThrowError() {
 
-        List<Object> list = new List<Object>(Arrays.asList(5, 6, 7, 8, 9));
+        MyList<Object> list = new MyList<Object>(Arrays.asList(5, 6, 7, 8, 9));
 
         ListException thrown1 =
                 assertThrows(ListException.class,
@@ -286,7 +286,7 @@ class ListTest {
 
     @Test
     void testAdd() {
-        List<Object> list = new List<Object>(Arrays.asList(5, 6, 7, 8, 9));
+        MyList<Object> list = new MyList<Object>(Arrays.asList(5, 6, 7, 8, 9));
 
         list.add(10);
 
@@ -298,13 +298,13 @@ class ListTest {
 
     @Test
     void removeAllOfShouldReturnFalseIfTheListDidNotChange() {
-        List<Object> list = new List<Object>(Arrays.asList(5, 6, 7, 8, 9));
+        MyList<Object> list = new MyList<Object>(Arrays.asList(5, 6, 7, 8, 9));
         assertFalse(list.removeAll(Arrays.asList(19, 10, 11, 0)));
     }
 
     @Test
     void removeAllShouldDeleteAllOccurrences() {
-        List<Object> list = new List<Object>(Arrays.asList(5, 6, 5, 9, 9));
+        MyList<Object> list = new MyList<Object>(Arrays.asList(5, 6, 5, 9, 9));
         assertTrue(list.removeAll(Arrays.asList(5, 9)));
         assertEquals(1, list.size());
         assertEquals(6, list.get(0));
@@ -313,14 +313,14 @@ class ListTest {
 
     @Test
     void retainAllShouldReturnFalseIfListDidNotChange() {
-        List<Object> list = new List<Object>(Arrays.asList(5, 6, 7, 8, 9));
+        MyList<Object> list = new MyList<Object>(Arrays.asList(5, 6, 7, 8, 9));
         assertFalse(list.retainAll(Arrays.asList(5, 6, 8, 9, 7)));
 
     }
 
     @Test
     void retainAllShouldReturnFalseIfListChanged() {
-        List<Object> list = new List<Object>(Arrays.asList(5, 6, 7, 8, 9));
+        MyList<Object> list = new MyList<Object>(Arrays.asList(5, 6, 7, 8, 9));
         assertTrue(list.retainAll(Arrays.asList(5, 5, 6)));
         assertEquals(2, list.size());
 
@@ -328,7 +328,7 @@ class ListTest {
 
     @Test
     void iteratorOverEmptyList() {
-        List<Object> list = new List<Object>();
+        MyList<Object> list = new MyList<Object>();
         Iterator<Object> iter = list.iterator();
 
         assertFalse(iter.hasNext());
@@ -337,7 +337,7 @@ class ListTest {
     @Test
     void testIteratorsNextMethodOverList() {
 
-        List<Object> list = new List<Object>(Arrays.asList(1, 2));
+        MyList<Object> list = new MyList<Object>(Arrays.asList(1, 2));
         Iterator<Object> iter = list.iterator();
         assertTrue(iter.hasNext());
 
@@ -355,7 +355,7 @@ class ListTest {
 
     @Test
     void hashCodeShouldReturnSameValueEachTime() {
-        List<Object> list = new List<Object>(Arrays.asList(5, 6, 7, 8, 9));
+        MyList<Object> list = new MyList<Object>(Arrays.asList(5, 6, 7, 8, 9));
 
         assertEquals(list.hashCode(), list.hashCode());
 
@@ -363,8 +363,8 @@ class ListTest {
 
     @Test
     void hashCodeShouldReturnSameValueForIdenticalObjects() {
-        List<Object> list1 = new List<Object>(Arrays.asList(5, 6, 7, 8, 9));
-        List<Object> list2 = new List<Object>(Arrays.asList(5, 6, 7, 8, 9));
+        MyList<Object> list1 = new MyList<Object>(Arrays.asList(5, 6, 7, 8, 9));
+        MyList<Object> list2 = new MyList<Object>(Arrays.asList(5, 6, 7, 8, 9));
 
         assertEquals(list1.hashCode(), list2.hashCode());
 
@@ -373,8 +373,8 @@ class ListTest {
 
     @Test
     void equalsOfIdenticalObjectShouldReturnTrue() {
-        List<Object> list1 = new List<Object>(Arrays.asList(1, 2, 3));
-        List<Object> list2 = new List<Object>(Arrays.asList(1, 2, 3));
+        MyList<Object> list1 = new MyList<Object>(Arrays.asList(1, 2, 3));
+        MyList<Object> list2 = new MyList<Object>(Arrays.asList(1, 2, 3));
 
         assertEquals(list1, list2);
     }
@@ -382,7 +382,7 @@ class ListTest {
 
     @Test
     void sortListShouldChangeTheList() {
-        List<Object> list1 = new List<Object>(Arrays.asList(3, 1, 2));
+        MyList<Object> list1 = new MyList<Object>(Arrays.asList(3, 1, 2));
         list1.sort(Comparator.comparingInt(t -> (Integer) t));
         assertEquals(1, list1.get(0));
         assertEquals(2, list1.get(1));
@@ -395,7 +395,7 @@ class ListTest {
     @Test
     void testToArrayWithArrayOfSmallerSize() {
 
-        List<Object> list = new List<Object>(Arrays.asList(1, 2, 3, 4));
+        MyList<Object> list = new MyList<Object>(Arrays.asList(1, 2, 3, 4));
         Object[] arr = new Object[1];
 
         arr = list.toArray(arr);
@@ -406,7 +406,7 @@ class ListTest {
     @Test
     void testToArrayWithArrayOfGreaterSize() {
 
-        List<Object> list = new List<Object>(Arrays.asList(1, 2, 3, 4));
+        MyList<Object> list = new MyList<Object>(Arrays.asList(1, 2, 3, 4));
         Object[] arr = new Object[10];
 
         arr = list.toArray(arr);
@@ -418,13 +418,13 @@ class ListTest {
 
     @Test
     void addAllOfShouldReturnFalseIfTheListDidNotChange() {
-        List<Object> list = new List<Object>(Arrays.asList(5, 6, 7, 8, 9));
+        MyList<Object> list = new MyList<Object>(Arrays.asList(5, 6, 7, 8, 9));
         assertFalse(list.addAll(null));
     }
 
     @Test
     void addAllShouldDeleteAllOccurrences() {
-        List<Object> list = new List<Object>(Arrays.asList(5, 6, 7, 8));
+        MyList<Object> list = new MyList<Object>(Arrays.asList(5, 6, 7, 8));
         assertTrue(list.addAll(Arrays.asList(5, 4)));
         assertEquals(6, list.size());
         assertEquals(5, list.get(4));
